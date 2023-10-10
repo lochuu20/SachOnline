@@ -1,0 +1,31 @@
+﻿@*@model SachOnline.Models.SACH*@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+s
+<div class="row text-center">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+        <div class="thumbnail">
+            <h4 class="tensach">
+                @Model.Tensach
+            </h4>
+            <img src="~/Images/@Model.Anhbia" alt="@Model.Tensach" class="img-responsive img-rounded imgbook" />
+
+            <div class="motasach">
+                <p>@Html.Raw(@Model.Mota.Replace("\n", "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))</p>
+            </div>
+
+            <div class="groupcart">
+                <p class="ngaycapnhat">Ngày cập nhật: @Html.FormatValue(@Model.Ngaycapnhat, "{0:dd/MM/yyyy}")</p>
+                <p class="giaban">Giá bán: <span class="price">@Html.FormatValue(@Model.Giaban, "{0:#,##0}") VND</span></p>
+                <p class="addtocart">
+                    <a href="@Url.Action("ThemGioHang","GioHang", new {ms = @Model.Masach, url=Request.Url.ToString()})" class="btn btn-primary" role="button">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Add to Cart
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
