@@ -31,6 +31,23 @@ namespace SachOnline.Controllers
             var listNXB = from cd in data.NHAXUATBANs select cd;
             return PartialView(listNXB);
         }
+        public ActionResult SachTheoChuDe(int id)
+        {
+            var sach = from s in data.SACHes where s.MaCD== id select s;
+            return View(sach);
+        }
+        public ActionResult SachTheoNXB(int id)
+        {
+            var sach = from s in data.SACHes where s.MaNXB == id select s;
+            return View(sach);
+        }
+
+        public ActionResult ChiTietSach (int id)
+        {
+            var sach = from s in data.SACHes
+                       where s.Masach == id select s;
+            return PartialView(sach.Single());
+        }
 
 
         private List<SACH> LaySachMoi(int count)
@@ -49,6 +66,7 @@ namespace SachOnline.Controllers
             var SachBanNhieu = ListSachBannhieu(6);
             return PartialView(SachBanNhieu);
         }
+        
     }
 
 }
