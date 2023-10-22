@@ -1,5 +1,9 @@
-﻿@{
-    ViewBag.Title = "";
+﻿@using SachOnline.Models;
+@using PagedList.Mvc;
+@model  PagedList.PagedList<SACH>
+
+@{
+    ViewBag.Title = "SachTheoChuDe";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
@@ -26,4 +30,13 @@
         </div>
     }
 </div>
-
+ @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager( Model,page => Url.Action("SachTheoChuDe", new { iMaCD = ViewBag.MaCD , page = page }))
+</div>
+<style>
+    .MenuTrang{
+        display: inline;
+        text-align: center;
+    }
+</style>

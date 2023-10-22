@@ -30,6 +30,7 @@ namespace SachOnline
                     "~/Scripts/bootstrap.min.js"));
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content.bootstrap.min.css"));
+            bundles.Add(new StyleBundle("~/Content/Admin/css").Include("~/Content/structure.css","~/Content/reset.css"));
         }
     }
 }
