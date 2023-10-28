@@ -29,8 +29,7 @@ namespace SachOnline.Controllers
             var sTenDN = f ["UserName"];
             var sMatKhau = f ["Password"];
             //Gán giá trị cho đối tượng được tạo mới (ad)
-            ADMIN ad = dbo.ADMINs.SingleOrDefault(n => n.TenDN == sTenDN && n.MatKhau
-            == sMatKhau);
+            ADMIN ad = dbo.ADMINs.SingleOrDefault(n => n.TenDN == sTenDN && n.MatKhau== sMatKhau);
             if (ad != null)
             {
                 Session["Admin"] = ad;

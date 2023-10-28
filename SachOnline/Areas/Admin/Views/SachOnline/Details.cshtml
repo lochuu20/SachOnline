@@ -1,0 +1,71 @@
+﻿
+@model SachOnline.Models.SACH
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style type="text/css">
+    img {
+        width: 200px;
+        margin-bottom: 20px;
+    }
+</style>
+<h2 style="text-align:center"> CHI TIẾT SÁCH</h2>
+<div >
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên sách:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tensach)
+        </dd>
+        <dt>
+            Mô tả:
+        </dt>
+        <dd>
+            @Html.Raw(@Model.Mota.ToString().Replace("\n","</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
+        </dd>
+        <dt>
+            Ảnh bìa:
+        </dt>
+        <dd>
+            <img src="~/Images/@Model.Anhbia" alt=" @Model.Tensach">
+        </dd>
+        <dt>
+            Ngày cập nhật:
+        </dt>
+        <dd>
+            @Html.FormatValue(@Model.Ngaycapnhat, "{0:dd/MM/yyyy}")
+        </dd>
+        <dt>
+            Số lượng bán:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Soluongban)
+        </dd>
+        <dt>
+            Giá bán:
+        </dt>
+        <dd>
+            @Html.FormatValue(@Model.Giaban, "{0:#,##0}") VNĐ
+        </dd>
+        <dt>
+            Chủ đề:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CHUDE.Tenchude)
+        </dd>
+        <dt>
+        Nhà xuất bản:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NHAXUATBAN.TenNXB)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.Masach }) |
+    @Html.ActionLink("VỀ TRANG QUẢN LÝ SÁCH", "Index")
+</p>
+
