@@ -4,17 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SachOnline.Models;
-
+using PagedList;
+using PagedList.Mvc;
 namespace SachOnline.Controllers
 {
     public class SachOnlineController : Controller
     {
         // GET: SachOnline
         DataClasses1DataContext data = new DataClasses1DataContext("Data Source=FISHDABEZT\\FISHDABEZT;Initial Catalog=SachOnline;Integrated Security=True");
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var listSachMoi = LaySachMoi(6);
-            return View(listSachMoi);
+            int iSize = 6;
+            int iPageNum = (page ?? 1);
+            var listSachMoi = LaySachMoi(20);
+            return View(listSachMoi.ToPagedList(iPageNum, iSize));
 
         }
         /// <summary>
@@ -23,7 +26,7 @@ namespace SachOnline.Controllers
         /// <returns>ReturnChuDe</returns>
         public ActionResult ChuDePartial()
         {
-            var listChuDe = from cd in data.CHUDEs select cd; 
+            var listChuDe = from cd in data.CHUDEs select cd;
             return PartialView(listChuDe);
         }
         public ActionResult NXBPartial()
@@ -31,16 +34,34 @@ namespace SachOnline.Controllers
             var listNXB = from cd in data.NHAXUATBANs select cd;
             return PartialView(listNXB);
         }
-        public ActionResult SachTheoChuDe(int id)
+        //public ActionResult SachTheoChuDe(int id)
+        //{
+        //    var sach = from s in data.SACHes where s.MaCD == id select s;
+        //    return View(sach);
+        //}
+        public ActionResult SachTheoChuDe(int iMaCD, int? page)
         {
-            var sach = from s in data.SACHes where s.MaCD== id select s;
-            return View(sach);
-        }
-        public ActionResult SachTheoNXB(int id)
+            ViewBag.MaCD = iMaCD;
+            int iSize = 3;
+            int iPageNum = (page ?? 1);
+            //int iPageNum = 1;
+            var sach = from s in data.SACHes where s.MaCD == iMaCD select s;
+            return View(sach.ToPagedList(iPageNum, iSize));
+        } public ActionResult SachTheoNXB(int iMaNXB, int? page)
         {
-            var sach = from s in data.SACHes where s.MaNXB == id select s;
-            return View(sach);
+            ViewBag.MaNXB = iMaNXB;
+            int iSize = 3;
+            int iPageNum = (page ?? 1);
+            //int iPageNum = 1;
+            var sach = from s in data.SACHes where s.MaCD == iMaNXB select s;
+            return View(sach.ToPagedList(iPageNum, iSize));
         }
+
+        //public ActionResult SachTheoNXB(int id)
+        //{
+        //    var sach = from s in data.SACHes where s.MaNXB == id select s;
+        //    return View(sach);
+        // }
 
         public ActionResult ChiTietSach (int id)
         {
@@ -66,7 +87,15 @@ namespace SachOnline.Controllers
             var SachBanNhieu = ListSachBannhieu(6);
             return PartialView(SachBanNhieu);
         }
-        
+        public ActionResult NavPartial()
+        {
+            
+            return PartialView();
+        }
+        public ActionResult LoginLogout()
+        {
+            return PartialView();
+        }
     }
 
 }
